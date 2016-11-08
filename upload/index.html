@@ -1,0 +1,82 @@
+<!-- Home Page -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Upload Flipside</title>
+        <!-- <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/> -->
+        <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        
+        <link href="../css/style.css" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="../js/js.js"></script>
+
+	</head>
+	<body>
+        <div class="container" ng-app="flipsideApp" ng-controller="EpisodeUploadController">
+
+            <div class="row">
+                <div class="h1 col-xs-12">Flipside File Upload</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1 col-md-2"></div>
+                <div class="col-xs-10 col-md-8" >
+                    <input ng-model="episodeuploadobj.data" type="text"></input>
+                    <button ng-click="searchAlbumName()">Search</button>
+                </div>
+                <div class="col-xs-1 col-md-2"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1 col-md-2"></div>
+                <div class="col-xs-10 col-md-8">
+                    <div ng-repeat="album in albumdatasearch.data">
+                        <div class="albumartselectwrapper">
+                            <img style="cursor:pointer; width:100px; height:100px;" ng-src="{{trustUrl(album.image)}}" ng-click="selectAlbum(album.id)">
+                            <br>
+                            <p>{{album.id}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-1 col-md-2"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1 col-md-2"></div>
+                <div class="col-xs-10 col-md-8">
+                    <div ng-repeat="id in albumdatafinal.data">
+                        {{id}}
+                    </div>
+                </div>
+                <div class="col-xs-1 col-md-2"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-1 col-md-2"></div>
+                <div class="col-xs-10 col-md-8">
+                    <form action="http://api.williamdunkerley.com/flipside/upload" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="albums" value="{{albumdatafinalstring.data}}">
+                        <input type="file" name="file">
+                        <label>Title: </label><input type="text" name="title">
+                        <br>
+                        <input class="btn" type="submit" value="Upload">
+                    </form>
+                </div>
+                <div class="col-xs-1 col-md-2"></div>
+            </div>
+
+        </div>
+	</body>
+</html>

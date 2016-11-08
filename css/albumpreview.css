@@ -1,0 +1,148 @@
+.albumpreview
+{
+	width: 260px;
+	display:flex;
+	flex-direction:column;
+	justify-content:flex-start;
+}
+
+/*album art viewer container*/
+.albumpreview > div:first-child
+{
+	display:flex;
+	justify-content:space-between;
+}
+
+/*album art a for img*/
+.albumpreview > div:first-child > a
+{
+	text-align: center;
+}
+.opena
+{
+	-webkit-animation: shiftOpena 1s forwards;
+	-webkit-animation-timing-function: ease-out;
+}
+@-webkit-keyframes shiftOpena
+{
+    0%   {width: 260px;}
+    100% {width: 460px;}
+}
+.closea
+{
+	-webkit-animation: shiftClosea .25s forwards;
+	-webkit-animation-timing-function: ease-out;
+}
+@-webkit-keyframes shiftClosea
+{
+    0%   {width: 460px;}
+    100% {width: 260px;}
+}
+
+/*album art img*/
+.albumpreview > div:first-child > a > img
+{
+	width: 200px;
+	height:200px;
+	position: relative;
+}
+
+/*circle*/
+.albumpreview > div:first-child > a > #circle
+{
+	position: absolute;
+
+	background: black;
+    border-radius: 50%;
+    height:200px;
+    width:200px;
+}
+
+/*Inside circle*/
+.albumpreview > div:first-child > a > #circle > img
+{
+	/*horizontal center, hard coded*/
+	margin: 50px auto;
+
+	height:100px;
+	width: 100px;
+
+	background: white;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+
+.albumpreview > div:first-child > a > .opencircle#circle
+{
+	-webkit-animation: shiftOpen 1s forwards;
+	-webkit-animation-timing-function: ease-out;
+}
+@-webkit-keyframes shiftOpen
+{
+    0%   {margin-left: 0px;}
+    100% {margin-left: 200px;}
+}
+
+.albumpreview > div:first-child > a > .closecircle#circle
+{
+	-webkit-animation: shiftClose .25s forwards;
+	-webkit-animation-timing-function: ease-out;
+}
+@-webkit-keyframes shiftClose
+{
+    0%   {margin-left: 200px;}
+    100% {margin-left: 0px;}
+}
+
+.albumpreview > div:first-child > a > .spinning#circle
+{
+	margin-left: 200px;
+	-webkit-animation: spin 2s forwards;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;	
+}
+@-webkit-keyframes spin 
+{
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
+/*arrow containers*/
+.albumpreview > div > div
+{
+	height:inherit;
+}
+
+/*arrow icons*/
+.albumpreview > div > div > img
+{
+	width:30px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+/*album info container*/
+.albumpreview > div:last-child
+{
+	text-align: center;
+}
+
+/*album info paragraphs*/
+.albumpreview > div > p
+{
+	margin-bottom: 0px;
+}
+
+.icon
+{
+	filter: invert(100%);
+}
+
+.albumartselectwrapper
+{
+	text-align: center;
+	float: left;
+}

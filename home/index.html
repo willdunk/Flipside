@@ -1,0 +1,109 @@
+<!-- Home Page -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<title>Flipside on WCPR</title>
+    	<!-- <link rel="shortcut icon" type="image/png" href="../images/favicon.png"/> -->
+    	<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css?family=Lalezar" rel="stylesheet">
+		
+    	<link href="../css/style.css" rel="stylesheet">
+    	<link href="../css/albumpreview.css" rel="stylesheet">
+
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="../js/js.js"></script>
+	</head>
+	<body>
+		<div class="container" ng-app="flipsideApp">
+			<div class="row">
+				<div class="h1 col-xs-12">
+					<h1>Flipside</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-1 col-md-2"></div>
+				<div class="col-xs-10 col-md-8" ng-controller="EpisodeFeedController" ng-init="buildList()">
+					<div class="panel-group" id="accordion">
+
+						<div ng-repeat="episode in episodelist.data" class="panel panel-default">
+							<div class="panel-heading">
+								<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#accordion" href="#collapse{{episode.weekID}}" ng-click="addAlbumInfo(episode.weekID); changePreviewAlbum(episode,true,true); playAnimationRecord(episode.weekID, false)">
+										{{episode.title}}
+									</a>
+								</h4>
+							</div>
+							<div id="collapse{{episode.weekID}}" class="panel-collapse collapse">
+								<div class="panel-body">
+									This is the episode for {{episode.title}}
+									<br>
+									Listen:
+									<br>
+									<audio controls data-ng-src="{{trustUrl(episode.filepath)}}" preload="none" id="audio{{episode.weekID}}"></audio>
+									<br>
+									<a href="{{episode.filepath}}" download>Download {{episode.title}}</a>
+									<br>
+
+									<div class="albumpreview">
+										<div>
+											<div>
+												<img src="../images/icons/arrow_left.png" ng-click="changePreviewAlbum(episode,false,false)"/>
+											</div>
+											
+											<a style="text-decoration:none;" href="{{episode.albums[selectedpane.albumindex].uri}}">
+												<div id="circle">
+													<img id="innercircle" ng-src="{{trustUrl(episode.albums[selectedpane.albumindex].image)}}">
+												</div>
+												<img style="cursor:pointer;" ng-src="{{trustUrl(episode.albums[selectedpane.albumindex].image)}}">
+											</a>
+
+				
+											<div>
+												<img src="../images/icons/arrow_right.png" ng-click="changePreviewAlbum(episode,true,false)"/>
+											</div>
+										</div>
+
+										<div>
+											<p>
+												{{episode.albums[selectedpane.albumindex].title}}
+											</p>
+											<p>
+												<span ng-repeat="artist in episode.albums[selectedpane.albumindex].artists track by $index">
+													<a href="{{artist.uri}}">{{artist.name}}</a>
+													<br>
+												</span>
+											</p>
+											<p>
+												{{episode.albums[selectedpane.albumindex].year}}
+											</p>
+											<p>
+												{{episode.albums[selectedpane.albumindex].styles.join(", ")}}
+											</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-xs-1 col-md-2"></div>
+			</div>
+		</div>
+		
+	</body>
+</html>

@@ -1,0 +1,27 @@
+body
+{
+	background-color: #222222;
+}
+
+h1
+{
+	font-family: 'Lalezar', cursive;
+	color: white;
+	text-align: center;
+}
+
+audio
+{
+	display: block;
+	width:100%;
+}
+
+.icon
+{
+	filter: invert(100%);
+}
+
+.albumpreview
+{
+	margin: 0 auto;
+}
